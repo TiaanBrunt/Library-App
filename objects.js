@@ -1,7 +1,5 @@
-
-//display book objects using divs
-
 let myLibrary = [];
+
 let submitButton = document.querySelector("#submit");
 let addBookButton = document.querySelector("#addBook");
 let cancelButton = document.querySelector("#cancel");
@@ -18,9 +16,11 @@ function resetContainer(){
     document.getElementById("library").innerHTML = "";
 }
 
+
 /** Clears the array */
 function resetArray(){
     myLibrary =[];
+    myLibrary.removeItem()
     displayLibrary();
 }
 
@@ -51,6 +51,7 @@ function addBookToLibrary() {
         form.authorInput.value = "";
         form.pagesInput.value = "";
         form.readInput.value = "";
+        saveLocal()
         displayLibrary();
     }
     else{
@@ -154,3 +155,14 @@ function displayLibrary(){
     
 
 
+    function saveLocal() {
+        localStorage.setItem("storedBooks", JSON.stringify(myLibrary));
+      }
+      
+    function retrieveLocal() {
+        myLibrary = JSON.parse(localStorage.getItem("storedBooks"));
+        if (myLibrary === null) myLibrary = [];
+        displayLibrary();
+      }
+      
+      retrieveLocal();
